@@ -26,14 +26,14 @@ app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie_name'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SECURE'] = False
 
-app.static_folder = '../client/build'
+app.static_folder = os.path.abspath('../client/build')
 
 # Flask-Migrate 
 migrate = Migrate(app, db)
 
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
+# @app.route('/')
+# def index():
+#     return '<h1>Project Server</h1>'
 
 @app.route('/uploaded_images/<filename>')
 def uploaded_file(filename):
@@ -70,7 +70,7 @@ api.add_resource(GetUserContactDetails, '/get-contact-details/<int:user_id>')
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
-    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+    if path and os.path.exists(os.path.join(app.static_folder, path)):
         return send_from_directory(app.static_folder, path)
     else:
         return send_from_directory(app.static_folder, 'index.html')
