@@ -2,6 +2,9 @@ import React from "react";
 import App from "./components/App";
 import "./index.css";
 import { createRoot } from "react-dom/client";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const container = document.getElementById("root");
 const root = createRoot(container);
