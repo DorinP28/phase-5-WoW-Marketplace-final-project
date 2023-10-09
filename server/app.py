@@ -18,7 +18,8 @@ bcrypt.init_app(app)
 app.secret_key = 'your_secret_key' 
 
 # CORS
-CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+CORS(app, supports_credentials=True)
+
 
 # session cookie configurations
 app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie_name'
