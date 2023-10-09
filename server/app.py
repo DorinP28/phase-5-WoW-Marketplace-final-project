@@ -18,12 +18,14 @@ bcrypt.init_app(app)
 app.secret_key = 'your_secret_key' 
 
 # CORS
-CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}}, supports_credentials=True)
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # session cookie configurations
 app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie_name'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SECURE'] = False
+
+app.static_folder = '../client/build'
 
 # Flask-Migrate 
 migrate = Migrate(app, db)
@@ -63,6 +65,14 @@ api.add_resource(DeleteMessageResource, '/messages/delete/<int:message_id>')
 api.add_resource(MessageListResource, '/messages')
 app.config['UPLOAD_FOLDER'] = 'uploaded_images'
 api.add_resource(GetUserContactDetails, '/get-contact-details/<int:user_id>')
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
