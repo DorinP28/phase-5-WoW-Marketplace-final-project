@@ -24,7 +24,6 @@ function ReviewList({ carId }) {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
-    // Fetch reviews for this car
     const fetchReviews = async () => {
       try {
         const response = await fetch(`/cars/${carId}/reviews`);

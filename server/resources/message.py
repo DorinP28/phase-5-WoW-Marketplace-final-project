@@ -29,7 +29,6 @@ class InboxResource(Resource):
         messages = Message.query.filter_by(recipient_id=session.get('user_id')).all()
         return [message.serialize() for message in messages]
 
-
 class SentMessagesResource(Resource):
     def get(self):
         if not session.get('user_id'):
@@ -37,7 +36,6 @@ class SentMessagesResource(Resource):
 
         messages = Message.query.filter_by(sender_id=session.get('user_id')).all()
         return [message.serialize() for message in messages]
-
 
 class DeleteMessageResource(Resource):
     def delete(self, message_id):
@@ -55,7 +53,6 @@ class DeleteMessageResource(Resource):
         db.session.commit()
 
         return {"message": "Message deleted successfully."}
-
 
 class MessageListResource(Resource):
     def get(self):

@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import UserContext from "./UserContext"; 
+import UserContext from "./UserContext";
 
 function Logout() {
   const { setUser } = useContext(UserContext);
@@ -10,13 +10,13 @@ function Logout() {
     const performLogout = async () => {
       try {
         const response = await fetch("/logout", {
-          method: 'POST',
-          credentials: 'include'
+          method: "POST",
+          credentials: "include",
         });
 
         if (response.ok) {
-          setUser(null); 
-          history.push("/"); 
+          setUser(null);
+          history.push("/");
         } else {
           console.error("Failed to logout:", response.statusText);
         }
@@ -28,7 +28,7 @@ function Logout() {
     performLogout();
   }, [history, setUser]);
 
-  return null; 
+  return null;
 }
 
 export default Logout;

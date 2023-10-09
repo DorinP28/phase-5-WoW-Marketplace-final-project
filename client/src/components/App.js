@@ -58,8 +58,8 @@ const App = () => {
           <Route path="/logout" component={Logout} />
           <Route path="/profile/:username" component={UserProfile} />
           <Route path="/post-car" component={PostCar} />
-          {/* placeholder for more routes */}
-          <Route component={NotFound} />
+          {/* Add more routes as needed */}
+          <Route component={NotFound} /> {/* This should always be the last Route */}
         </Switch>
       </Router>
     </UserContext.Provider>

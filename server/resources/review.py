@@ -31,11 +31,10 @@ class CarReviewsResource(Resource):
             user_id=session.get('user_id')
         )
 
- 
         if not session.get('user_id'):
-            reviewer = "Unregistered User {}".format(str(Review.query.count() + 1))  # Generate a unique username
-            dummy_hashed_password = "unregistered_dummy_hash"  # Dummy hashed password for unregistered users
-            dummy_email = "unregistered{}@dummy.com".format(str(Review.query.count() + 1))  # Dummy email
+            reviewer = "Unregistered User {}".format(str(Review.query.count() + 1))  # generate a unique username
+            dummy_hashed_password = "unregistered_dummy_hash"  # dummy hashed password for unregistered users
+            dummy_email = "unregistered{}@dummy.com".format(str(Review.query.count() + 1))  # dummy email
             unreg_user = User(username=reviewer, hashed_password=dummy_hashed_password, email=dummy_email)
             db.session.add(unreg_user)
             db.session.flush()

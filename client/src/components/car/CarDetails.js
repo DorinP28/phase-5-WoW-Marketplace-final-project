@@ -68,7 +68,7 @@ function CarDetails({ match }) {
   const handleOpenModal = async () => {
     try {
       const response = await fetch(`/users/${car.owner.id}`, {
-        credentials: "include", // Include credentials in the request
+        credentials: "include",
       });
       if (response.ok) {
         const data = await response.json();

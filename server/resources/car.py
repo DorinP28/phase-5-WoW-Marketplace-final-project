@@ -22,7 +22,6 @@ class CarListResource(Resource):
         if not user_id:
             return {'message': 'Authentication required.'}, 401
 
-        # Fetching form data instead of JSON for mixed content 
         make = request.form.get('make')
         model = request.form.get('model')
         year = request.form.get('year')

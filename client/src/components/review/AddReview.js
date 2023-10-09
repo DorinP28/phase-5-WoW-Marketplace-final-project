@@ -30,7 +30,6 @@ function AddReview({ carId, loggedInUser }) {
         throw new Error("Network response was not ok");
       }
 
-      // Refresh the reviews after adding
       window.location.reload();
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error.message);

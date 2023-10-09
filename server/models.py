@@ -44,7 +44,7 @@ class Car(db.Model, SerializerMixin):
     model = db.Column(db.String(100), nullable=False)
     year = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
-    images = db.Column(db.String(300))  
+    images = db.Column(db.String(300))  # URL or path to image
     owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     
     # relationships

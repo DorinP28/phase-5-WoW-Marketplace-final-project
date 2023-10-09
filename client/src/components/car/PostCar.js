@@ -29,7 +29,7 @@ function PostCar() {
     const response = await fetch("/cars", {
       method: "POST",
       body: formData,
-      credentials: "include", // for cookies
+      credentials: "include",
     });
 
     const data = await response.json();

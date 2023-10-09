@@ -1,39 +1,28 @@
 #!/usr/bin/env python3
 
-import os
-
 from flask import render_template, request, send_from_directory
 from config import app, db, api
 from flask_migrate import Migrate
 from flask_cors import CORS
 from models import User, Car, Review, Message, wishlist, bcrypt
 
-# Database Config for Deployment
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI', 'sqlite:///app.db')  
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-port = int(os.environ.get('PORT', 5555))
-
-# bcrypt and set the app's secret key
+# bcrypt and the app's secret key
 bcrypt.init_app(app)
-app.secret_key = 'your_secret_key' 
+app.secret_key = 'your_secret_key'  
 
-# CORS
-CORS(app, supports_credentials=True)
-
+# Set up CORS
+CORS(app, resources={r"/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:3000"]}}, supports_credentials=True)
 
 # session cookie configurations
 app.config['SESSION_COOKIE_NAME'] = 'your_session_cookie_name'
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SECURE'] = False
 
-app.static_folder = os.path.abspath('../client/build')
-
-# Flask-Migrate 
 migrate = Migrate(app, db)
 
-# @app.route('/')
-# def index():
-#     return '<h1>Project Server</h1>'
+@app.route('/')
+def index():
+    return '<h1>Project Server</h1>'
 
 @app.route('/uploaded_images/<filename>')
 def uploaded_file(filename):
@@ -67,15 +56,7 @@ api.add_resource(MessageListResource, '/messages')
 app.config['UPLOAD_FOLDER'] = 'uploaded_images'
 api.add_resource(GetUserContactDetails, '/get-contact-details/<int:user_id>')
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
-def serve(path):
-    if path and os.path.exists(os.path.join(app.static_folder, path)):
-        return send_from_directory(app.static_folder, path)
-    else:
-        return send_from_directory(app.static_folder, 'index.html')
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port)
+    app.run(port=5555, debug=True)
 
 

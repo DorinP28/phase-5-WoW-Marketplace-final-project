@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 function MessageList() {
   const [messages, setMessages] = useState({ sent: [], received: [] });
   const [error, setError] = useState("");
-  const [showReceived, setShowReceived] = useState(true); // New state for toggling
+  const [showReceived, setShowReceived] = useState(true);
 
   useEffect(() => {
     async function fetchMessages() {

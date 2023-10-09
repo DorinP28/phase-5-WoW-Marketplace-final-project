@@ -4,7 +4,6 @@ from app import app
 from models import db, User, Car, Review, Message
 
 def seed_data():
-    # Clear existing data
     db.drop_all()
     db.create_all()
 
@@ -21,7 +20,7 @@ def seed_data():
         db.session.add(user)
     db.session.commit()
 
-    # Cars - images paths
+    # Cars with images path
     cars = [
         Car(make='Toyota', model='Camry', year=2021, price=30000, owner=users[0], images='uploaded_images/2021-toyota-camry.jpg'),
         Car(make='Honda', model='Civic', year=2020, price=25000, owner=users[1], images='uploaded_images/2020-honda-civic.jpg'),

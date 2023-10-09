@@ -29,7 +29,7 @@ function Login() {
         if (userResponse.ok) {
           const userData = await userResponse.json();
           setUser(userData);
-          history.push("/"); // Redirect to the HomePage
+          history.push("/");
         } else {
           console.error("Failed to fetch user session:", userResponse.statusText);
           setMessage("Failed to fetch user session.");

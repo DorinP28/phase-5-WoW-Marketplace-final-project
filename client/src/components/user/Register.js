@@ -33,7 +33,7 @@ function Register() {
 
         if (response.ok) {
           const data = await response.json();
-          alert(data.message);
+          alert(data.message); 
 
           setUser({ username: values.username });
 
